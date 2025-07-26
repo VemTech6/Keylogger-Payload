@@ -1,20 +1,23 @@
 <h1>Keylogger Payload Project</h1>
 
- ### [YouTube Demonstration](https://youtu.be/7eJexJVCqJo)
 
 <h2>Description</h2>
-Project consists of a simple PowerShell script that walks the user through "zeroing out" (wiping) any drives that are connected to the system. The utility allows you to select the target disk and choose the number of passes that are performed. The PowerShell script will configure a diskpart script file based on the user's selections and then launch Diskpart to perform the disk sanitization.
+This Rubber Ducky payload is designed to silently collect key network information from a Windows machine, including the public IP address, local IP address, network adapter configuration, and Wi-Fi SSID. The data is stored locally or optionally exfiltrated for analysis. This script demonstrates how attackers or red teamers could leverage physical access to quickly extract network intel from a target system.
 <br />
 
 
 <h2>Languages and Utilities Used</h2>
 
+- <b>USB Rubber Ducky</b>
 - <b>PowerShell</b> 
-- <b>Diskpart</b>
+- <b>Ducky Script</b>
+- <b>Payload Studio</b>
+- <b>ifconfig.me</b>
+- <b>GitHub API</b>
 
-<h2>Environments Used </h2>
+<h2>Objectives</h2>
 
-- <b>Windows 10</b> (21H2)
+- <b>To simulate how a malicious USB HID device can gather and store or transmit network-related data from a compromised machine within seconds of being plugged in.</b> 
 
 <h2>Program walk-through:</h2>
 
