@@ -1,54 +1,66 @@
 <h1>Keylogger Payload Project</h1>
 
 
+
 <h2>Description</h2>
-This Rubber Ducky payload is designed to silently collect key network information from a Windows machine, including the public IP address, local IP address, network adapter configuration, and Wi-Fi SSID. The data is stored locally or optionally exfiltrated for analysis. This script demonstrates how attackers or red teamers could leverage physical access to quickly extract network intel from a target system.
+The objective of this project is to simulate a USB-based HID attack using a Rubber Ducky device to demonstrate how physical access can lead to system information disclosure. The payload is designed to raise awareness around endpoint vulnerabilities by automatically collecting system details (e.g., IP addresses, hostname, Wi-Fi SSID) and exfiltrating them to a remote GitHub repository. This proof-of-concept highlights the importance of USB security, physical device control, and endpoint monitoring in an organization's defense strategy. The detailed project walkthrough can be found <a href="https://github.com/VemTech6/Keylogger-Payload/blob/main/Project%20Walkthrough.md">HERE</a>.
 <br />
 
 
-<h2>Languages and Utilities Used</h2>
+<h2>Methodology</h2>
 
-- <b>USB Rubber Ducky</b>
-- <b>PowerShell</b> 
-- <b>Ducky Script</b>
-- <b>Payload Studio</b>
-- <b>ifconfig.me</b>
-- <b>GitHub API</b>
 
-<h2>Objectives</h2>
 
-- <b>To simulate how a malicious USB HID device can gather and store or transmit network-related data from a compromised machine within seconds of being plugged in.</b> 
+The payload attack followed a structured process:
 
-<h2>Program walk-through:</h2>
+| **Phase**             | **Description**                                                                 |
+|-----------------------|---------------------------------------------------------------------------------|
+| Physical Access       | Simulated attacker plugs in a USB Rubber Ducky into the victim’s machine.      |
+| Command Execution     | Executes PowerShell commands to gather system details (IP, SSID, hostname).    |
+| Data Exfiltration     | Uploads information to a GitHub repository via REST API (using HTTPS).         |
+| Visual Distraction    | Optionally opens Notepad to mask payload activity.                             |
+| Post-Attack Review    | Analyzes what detection/prevention controls could mitigate this attack vector. |
 
-<p align="center">
-Launch the utility: <br/>
-<img src="https://i.imgur.com/62TgaWL.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<br />
-Select the disk:  <br/>
-<img src="https://i.imgur.com/tcTyMUE.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<br />
-Enter the number of passes: <br/>
-<img src="https://i.imgur.com/nCIbXbg.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<br />
-Confirm your selection:  <br/>
-<img src="https://i.imgur.com/cdFHBiU.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<br />
-Wait for process to complete (may take some time):  <br/>
-<img src="https://i.imgur.com/JL945Ga.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<br />
-Sanitization complete:  <br/>
-<img src="https://i.imgur.com/K71yaM2.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<br />
-Observe the wiped disk:  <br/>
-<img src="https://i.imgur.com/AeZkvFQ.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-</p>
+</b>
+
+
+<h2>Findings</h2>
+
+Key observations and results during testing:
+
+<b>
+
+| **Observation**                   | **Severity** | **Notes**                                                                 |
+|----------------------------------|--------------|---------------------------------------------------------------------------|
+| USB payload executed successfully | High         | Payload was able to run without user interaction once plugged in.        |
+| PowerShell not blocked           | Medium       | Default security settings allowed PowerShell to run without restriction. |
+| Data exfiltrated via GitHub      | High         | GitHub API successfully received system info using HTTPS.                |
+| No endpoint alerts triggered     | Medium       | No AV/EDR flagged the activity during testing.                            |
+
+</b> 
+
+<h2>Recommendations</h2>
+
+Defensive strategies to prevent this type of attack.
+<b> 
+
+| **Recommendation**                     | **Purpose / Benefit**                                                              |
+|----------------------------------------|------------------------------------------------------------------------------------|
+| Disable unused USB ports               | Prevents unauthorized devices from being connected to critical systems.           |
+| Implement USB device control software  | Allows only authorized USB peripherals; blocks HID devices like Rubber Ducky.     |
+| Monitor PowerShell and scripting usage | Helps detect suspicious or automated script execution behavior.                   |
+| Enforce endpoint detection (EDR)       | EDR solutions can flag unusual system commands or unauthorized API requests.      |
+| Conduct regular user awareness training| Educates employees on the risks of plugging in unknown or suspicious USB devices. |
+| Limit physical access to machines      | Reduces risk of attackers gaining physical access to deliver payloads.            |
+
+
+</b>
+
+<h2>Conclusion</h2>
+
+<b>This Rubber Ducky payload project demonstrates how a simple HID-based attack can be used to exfiltrate sensitive system information within seconds of physical access. While the payload itself is non-malicious and intended for awareness, it highlights how easily a system can be compromised without the need for elevated privileges or complex malware. The experiment underscores the importance of physical security, USB port management, user training, and endpoint monitoring as critical layers of defense. In a real-world environment, even basic scripts like this could serve as the entry point for much larger attacks if proper controls aren’t in place. This project serves as a reminder that cybersecurity isn't just digital — it starts at the physical layer.</b>
+
+
 
 <!--
  ```diff
