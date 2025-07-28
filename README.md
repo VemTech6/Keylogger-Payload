@@ -5,6 +5,9 @@
 <h2>Description</h2>
 The objective of this project is to simulate a USB-based HID attack using a Rubber Ducky device to demonstrate how physical access can lead to system information disclosure. The payload is designed to raise awareness around endpoint vulnerabilities by automatically collecting system details (e.g., IP addresses, hostname, Wi-Fi SSID) and exfiltrating them to a remote GitHub repository. This proof-of-concept highlights the importance of USB security, physical device control, and endpoint monitoring in an organization's defense strategy. The detailed project walkthrough can be found <a href="https://github.com/VemTech6/Keylogger-Payload/blob/main/Project%20Walkthrough.md">HERE</a>.
 <br />
+<br />
+
+<img src="https://i.imgur.com/g91Y3g7.png" height="80%" width="80%" alt=" Payload Walkthrough"/>
 
 
 <h2>Methodology</h2>
